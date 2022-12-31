@@ -4,20 +4,38 @@ import axios from "axios";
 
 import signinImage from "../assets/signup.jpg";
 
+const initialState = {
+  fullName: "",
+  username: "",
+  password: "",
+  confirmPassword: "",
+  avatarUrl: "",
+  phoneNumber: "",
+};
+
 const Auth = () => {
+  const [form, setForm] = useState(initialState);
   const [isSignUP, setIsSignUP] = useState(true);
 
   const switchMode = () => {
     setIsSignUP((prevIsSignUp) => !prevIsSignUp);
   };
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+    console.warn(form);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.warn("handleSubmit", form);
+  };
 
   return (
     <div className="auth__form-container">
       <div className="auth__form-container_fields">
         <div className="auth__form-container_fields-content">
           <p>{isSignUP ? "Sign Up" : "Sign In"}</p>
-          <form onSubmit={() => {}}>
+          <form onSubmit={handleSubmit}>
             {isSignUP && (
               <div className="auth__form-container_fields-content_input">
                 <label htmlFor="fullName">Full Name</label>
@@ -33,7 +51,7 @@ const Auth = () => {
             <div className="auth__form-container_fields-content_input">
               <label htmlFor="username"> UserName</label>
               <input
-                name="userName"
+                name="username"
                 placeholder="UserName"
                 onChange={handleChange}
                 required
@@ -87,6 +105,10 @@ const Auth = () => {
                 />
               </div>
             )}
+
+            <div className="auth__form-container_fields-content_button">
+              <button>{isSignUP ? "Sign Up" : "Sign In"}</button>
+            </div>
           </form>
           <div className="auth__form-container_fields-account">
             <p>
