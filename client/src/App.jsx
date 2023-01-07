@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StreamChat } from "stream-chat";
 import { Chat } from "stream-chat-react";
 import Cookies from "universal-cookie";
 
 import { ChannelListContainer, ChannelContainer, Auth } from "./components";
-
-import "./App.css";
 import config from "./constant/config";
+import "./App.css";
+import "stream-chat-react/dist/css/index.css";
 
 const cookies = new Cookies();
 
@@ -29,6 +29,9 @@ if (authToken) {
   );
 }
 const App = () => {
+  const [createType, setCreateType] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   /* useEffect(() => {
     const checkToken = async () => {
       if (authToken) {
@@ -56,9 +59,20 @@ const App = () => {
   return (
     <div className="app__wrapper">
       <Chat client={client} theme="team light">
-        <ChannelListContainer />
+        <ChannelListContainer
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          setIsEditing={isEditing}
+          setCreateType={createType}
+        />
 
-        <ChannelContainer />
+        <ChannelContainer
+          isCreating={isCreating}
+          setIsCreating={setIsCreating}
+          isEditing={isEditing}
+          setIsEditing={isEditing}
+          createType={createType}
+        />
       </Chat>
     </div>
   );
