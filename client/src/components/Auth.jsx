@@ -23,12 +23,10 @@ const Auth = () => {
   };
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.warn(form);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.warn("handleSubmit", form);
 
     const { username, password, avatarURL, phoneNumber } = form;
 

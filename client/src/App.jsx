@@ -11,7 +11,6 @@ import "stream-chat-react/dist/css/index.css";
 const cookies = new Cookies();
 
 const apiKey = config.STREAM_API_KEY;
-console.warn("apiKey mm", apiKey);
 const client = StreamChat.getInstance(apiKey);
 const authToken = cookies.get("token");
 
@@ -46,8 +45,6 @@ const App = () => {
           },
           authToken
         );
-
-        console.warn("resData", resData);
       }
     };
     checkToken();
@@ -62,15 +59,15 @@ const App = () => {
         <ChannelListContainer
           isCreating={isCreating}
           setIsCreating={setIsCreating}
-          setIsEditing={isEditing}
-          setCreateType={createType}
+          setIsEditing={setIsEditing}
+          setCreateType={setCreateType}
         />
 
         <ChannelContainer
           isCreating={isCreating}
           setIsCreating={setIsCreating}
           isEditing={isEditing}
-          setIsEditing={isEditing}
+          setIsEditing={setIsEditing}
           createType={createType}
         />
       </Chat>
