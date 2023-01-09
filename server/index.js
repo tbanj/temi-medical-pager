@@ -40,6 +40,7 @@ app.post("/", (req, res) => {
         }
       });
 
+    // console.log('you are here');
     return res.status(200).send("Message sent");
   }
 
