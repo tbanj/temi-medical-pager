@@ -30,7 +30,7 @@ const Auth = () => {
 
     const { username, password, avatarURL, phoneNumber } = form;
 
-    const URL = "http://localhost:5000/auth";
+    const URL = "https://temi-pager.onrender.com/auth";
 
     const {
       data: { token, userId, hashedPassword, fullName },
