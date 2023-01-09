@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useChatContext } from "stream-chat-react";
 import { SearchIcon } from "../assets";
-import { ResultsDropdown } from "./index";
+import { ResultsDropdown } from "./";
 
 const ChannelSearch = ({ setToggleContainer }) => {
   const { client, setActiveChannel } = useChatContext();
@@ -27,11 +27,11 @@ const ChannelSearch = ({ setToggleContainer }) => {
         members: { $in: [client.userID] },
       });
       const userResponse = client.queryUsers({
-        name: { $autocomplete: text },
         id: { $ne: client.userID },
+        name: { $autocomplete: text },
       });
 
-      const [channels, users] = await Promise.all([
+      const [channels, { users }] = await Promise.all([
         channelResponse,
         userResponse,
       ]);
