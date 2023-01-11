@@ -28,10 +28,13 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, password, avatarURL, phoneNumber } = form;
+    const { username, password, avatarURL, phoneNumber, confirmPassword } =
+      form;
 
     const URL = "https://temi-pager.onrender.com/auth";
 
+    if (isSignUP && confirmPassword !== password) {
+    }
     const {
       data: { token, userId, hashedPassword, fullName },
     } = await axios.post(`${URL}/${isSignUP ? "signup" : "login"}`, {

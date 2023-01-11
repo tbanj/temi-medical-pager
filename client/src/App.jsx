@@ -7,6 +7,7 @@ import { ChannelListContainer, ChannelContainer, Auth } from "./components";
 import config from "./constant/config";
 import "./App.css";
 import "stream-chat-react/dist/css/index.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const cookies = new Cookies();
 
