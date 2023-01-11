@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useChatContext } from "stream-chat-react";
 import { UserList } from "./";
 import { CloseCreateChannel } from "../assets";
+import { notifyError } from "../utils/helpers/ToastHelpers";
 
 const ChannelNameInput = ({ channelName = "", setChannelName }) => {
   const { client, setActiveChannel } = useChatContext();
@@ -39,6 +40,11 @@ const CreateChannel = ({ createType, setIsCreating }) => {
         name: channelName,
         members: selectedUsers,
       });
+
+      if (channelName.length < 1 || selectedUsers.length < 1) {
+        notifyError(`You need to have a channel name & select member's`);
+        return;
+      }
       await newChannel.watch();
 
       setChannelName("");
