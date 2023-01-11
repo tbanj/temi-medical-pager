@@ -3,6 +3,7 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 
 import signinImage from "../assets/signup.jpg";
+import { notifyError } from "../utils/helpers/ToastHelpers";
 
 const cookies = new Cookies();
 const initialState = {
@@ -34,6 +35,8 @@ const Auth = () => {
     const URL = "https://temi-pager.onrender.com/auth";
 
     if (isSignUP && confirmPassword !== password) {
+      notifyError("Password does not match");
+      return;
     }
     const {
       data: { token, userId, hashedPassword, fullName },
@@ -71,6 +74,7 @@ const Auth = () => {
                 <input
                   name="fullName"
                   placeholder="Full Name"
+                  maxLength={100}
                   onChange={handleChange}
                   required
                   type="text"
@@ -78,10 +82,11 @@ const Auth = () => {
               </div>
             )}
             <div className="auth__form-container_fields-content_input">
-              <label htmlFor="username"> UserName</label>
+              <label htmlFor="username">UserName</label>
               <input
                 name="username"
                 placeholder="UserName"
+                maxLength={50}
                 onChange={handleChange}
                 required
                 type="text"
@@ -93,6 +98,7 @@ const Auth = () => {
                 <input
                   name="phoneNumber"
                   placeholder="Phone Number"
+                  maxLength={14}
                   onChange={handleChange}
                   required
                   type="text"
@@ -104,6 +110,7 @@ const Auth = () => {
                 <label htmlFor="avatarURL">Avatar URL</label>
                 <input
                   name="avatarURL"
+                  maxLength={100}
                   placeholder="Avatar URL"
                   onChange={handleChange}
                   required
@@ -117,6 +124,7 @@ const Auth = () => {
               <input
                 name="password"
                 placeholder="Password"
+                maxLength={50}
                 onChange={handleChange}
                 required
                 type="password"
@@ -127,6 +135,7 @@ const Auth = () => {
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   name="confirmPassword"
+                  maxLength={50}
                   placeholder="Confirm Password"
                   onChange={handleChange}
                   required
@@ -141,7 +150,9 @@ const Auth = () => {
           </form>
           <div className="auth__form-container_fields-account">
             <p>
-              {isSignUP ? "Already have an account?" : "Don't have an account"}
+              {isSignUP
+                ? `Already have an account? `
+                : `Don't have an account `}
               <span onClick={switchMode}>
                 {isSignUP ? "Sign In" : "Sign Up"}
               </span>
