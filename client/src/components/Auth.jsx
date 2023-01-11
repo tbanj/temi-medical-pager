@@ -79,7 +79,7 @@ const Auth = () => {
       window.location.reload();
     } catch (error) {
       setIsLoading(false);
-      if (error.response.data.message === "Incorrect password") {
+      if (error?.response?.data?.message === "Incorrect password") {
         notifyError("Email or password is incorrect");
         setIsLoading(false);
       } else {
